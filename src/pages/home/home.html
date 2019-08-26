@@ -1,0 +1,210 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+    <div >
+
+        <div >
+            <label >
+                <input type="text" [(ngModel)]="bar"> </label>
+            <button  (click)="scanBarcode()">
+                SCAN BARCODE
+            </button>
+        </div>
+
+        <div >
+            <label >
+                <input type="text" [(ngModel)]="nfc">
+            </label>
+            <button  (click)="diversion()">
+                SCAN NFC  TAG
+            </button>
+        </div>
+
+        <div >
+            <label >
+                <input type="text" [(ngModel)]="uid" placeholder="U ID" required>
+            </label>
+        </div>
+
+        <div >
+            <label >
+                <input type="text" [(ngModel)]="productid" placeholder="PRODUCT ID" required>
+            </label>
+
+        </div>
+        <div >
+            <label >
+                <input type="text" [(ngModel)]="trackingid" placeholder="TRACKING ID" required>
+            </label>
+
+        </div>
+        <div >
+            <label >
+                <input type="text" [(ngModel)]="dealerid" placeholder="DEALER ID" required>
+            </label>
+
+        </div>
+        <div >
+            <label >
+                <input type="text" [(ngModel)]="retailerid" placeholder="RETAILER ID" required>
+            </label>
+
+        </div>
+        <div >
+            <label >
+                <input type="text" [(ngModel)]="compositeid" placeholder="COMPOSITE ID" required>
+            </label>
+
+        </div>
+        <div >
+            <label >
+                <input type="text" [(ngModel)]="stamp" placeholder="STAMP" required>
+            </label>
+        </div>
+
+
+
+        <div >
+            <button id="submit" ng-disabled="denter.$invalid" (click)="submitForm()">
+                SUBMIT </button>
+        </div>
+
+    </div>
+
+
+
+</ion-content> -->
+
+<!-- <ion-content>
+    <div align="center">
+    <button  ion-button color="primary" (click)="getlocation()">getlocation</button>
+</div>
+<div align="center">
+<p>Lat : {{lat}}</p>
+<p>LONG: {{long}}</p>
+</div>
+</ion-content> -->
+
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        Ionic Geocoder
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+
+
+    <div align="center">
+        <button  ion-button color="primary" (click)="getlocation()">getlocation</button>
+    </div>
+    <div align="center">
+    <p>Lat : {{lat}}</p>
+    <p>LONG: {{long}}</p>
+    </div>
+  
+     <!--
+        Handle switching between the different form types (and
+        change the text displayed within the button) by calling
+        the filterForm method from the component class
+     -->
+     <button
+        ion-button
+        block
+        color="secondary"
+        (click)="filterForm()">{{ filter }}</button>
+  
+  
+  
+     <!--
+        Conditionally display the address based Geocoding form
+        and implement the Angular FormBuilder form object (defined in the
+        component class) to handle validating the single form field
+     -->
+     <form
+        *ngIf="displayForward"
+        [formGroup]="form"
+        (ngSubmit)="performForwardGeocoding(form.value)">
+        <ion-list>
+           <ion-item margin-bottom>
+              <ion-label>Location</ion-label>
+              <ion-input
+                 type="text"
+                 formControlName="keyword"></ion-input>
+           </ion-item>
+  
+  
+           <ion-item margin-bottom>
+              <button
+                 ion-button
+                 color="primary"
+                 text-center
+                 block
+                 [disabled]="!form.valid">Geocode this location</button>
+           </ion-item>
+  
+        </ion-list>
+     </form>
+  
+  
+  
+     <!--
+        Conditionally display the latitude/longitude based Geocoding form
+        and implement the Angular FormBuilder form object (defined in the
+        component class) to handle validating the 2 form fields
+     -->
+     <form
+        *ngIf="displayReverse"
+        [formGroup]="geoForm"
+        (ngSubmit)="performReverseGeocoding(geoForm.value)">
+        <ion-list>
+           <ion-item margin-bottom>
+              <ion-label>Latitude</ion-label>
+              <ion-input
+                 type="text"
+                 formControlName="latitude"  value="{{lat}}">{{lat}}</ion-input>
+           </ion-item>
+  
+  
+           <ion-item margin-bottom>
+              <ion-label>Longitude</ion-label>
+              <ion-input
+                 type="text"
+                 formControlName="longitude" value="{{long}}">{{long}}</ion-input>
+           </ion-item>
+           
+  
+  
+           <ion-item margin-bottom>
+              <button
+                 ion-button
+                 color="primary"
+                 text-center
+                 block
+                 [disabled]="!geoForm.valid">Geocode this location</button>
+           </ion-item>
+  
+        </ion-list>
+     </form>
+  
+  
+  
+     <!--
+        Conditionally display the geocoding results
+     -->
+     <section *ngIf="geocoded">
+        {{ results }}
+     </section>
+
+     <section>{{device_id}}</section>
+  
+  </ion-content>
